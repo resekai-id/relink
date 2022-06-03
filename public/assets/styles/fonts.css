@@ -1,0 +1,234 @@
+/* AKTIV GROTESK */
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  font-style: normal;
+  font-weight: 100;
+  src: local('AktivGrotesk'), local('Actief Grotesque'),
+    url('/assets/fonts/AktivGrotesk/Thin.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  font-style: italic;
+  font-weight: 100;
+  src: local('AktivGrotesk'), local('Actief Grotesque'),
+    url('/assets/fonts/AktivGrotesk/ThinItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  src: local('AktivGrotesk'), local('Actief Grotesque'),
+    url('/assets/fonts/AktivGrotesk/Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  src: local('AktivGrotesk'), local('Actief Grotesque'),
+    url('/assets/fonts/AktivGrotesk/Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  font-style: italic;
+  font-weight: 500;
+  src: local('AktivGrotesk'), local('Actief Grotesque'),
+    url('/assets/fonts/AktivGrotesk/MediumItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  font-style: normal;
+  font-weight: 800;
+  src: local('AktivGrotesk'), local('Actief Grotesque'),
+    url('/assets/fonts/AktivGrotesk/XBold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  font-style: italic;
+  font-weight: 800;
+  src: local('AktivGrotesk'), local('Actief Grotesque'),
+    url('/assets/fonts/AktivGrotesk/XBoldItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  font-style: normal;
+  font-weight: 950;
+  src: local('AktivGrotesk'), local('Actief Grotesque'),
+    url('/assets/fonts/AktivGrotesk/Black.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  font-style: italic;
+  font-weight: 950;
+  src: local('AktivGrotesk'), local('Actief Grotesque'),
+    url('/assets/fonts/AktivGrotesk/BlackItalic.woff') format('woff');
+}
+
+/* FAKT PRO */
+@font-face {
+  font-family: 'Fakt Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Fakt Pro'), url('/assets/fonts/FaktPro/Normal.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Fakt Pro';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Fakt Pro'), url('/assets/fonts/FaktPro/Medium.woff') format('woff2');
+}
+
+/* GT Super Display */
+@font-face {
+  font-family: 'GT Super Display';
+  font-style: normal;
+  font-weight: 300;
+  src: local('GT Super Display'), url('/assets/fonts/GTSuper/Display/Light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Display';
+  font-style: italic;
+  font-weight: 300;
+  src: local('GT Super Display'),
+    url('/assets/fonts/GTSuper/Display/LightItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Display';
+  font-style: normal;
+  font-weight: 400;
+  src: local('GT Super Display'), url('/assets/fonts/GTSuper/Display/Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Display';
+  font-style: italic;
+  font-weight: 400;
+  src: local('GT Super Display'),
+    url('/assets/fonts/GTSuper/Display/RegularItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Display';
+  font-style: normal;
+  font-weight: 500;
+  src: local('GT Super Display'), url('/assets/fonts/GTSuper/Display/Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Display';
+  font-style: italic;
+  font-weight: 500;
+  src: local('GT Super Display'),
+    url('/assets/fonts/GTSuper/Display/MediumItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Display';
+  font-style: normal;
+  font-weight: 700;
+  src: local('GT Super Display'), url('/assets/fonts/GTSuper/Display/Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Display';
+  font-style: italic;
+  font-weight: 700;
+  src: local('GT Super Display'),
+    url('/assets/fonts/GTSuper/Display/BoldItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Display';
+  font-style: normal;
+  font-weight: 950;
+  src: local('GT Super Display'), url('/assets/fonts/GTSuper/Display/Super.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Display';
+  font-style: italic;
+  font-weight: 950;
+  src: local('GT Super Display'),
+    url('/assets/fonts/GTSuper/Display/SuperItalic.woff2') format('woff2');
+}
+
+/* GT Super Text */
+@font-face {
+  font-family: 'GT Super Text';
+  font-style: normal;
+  font-weight: 300;
+  src: local('GT Super Text'), url('/assets/fonts/GTSuper/Text/Light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Text';
+  font-style: italic;
+  font-weight: 300;
+  src: local('GT Super Text'), url('/assets/fonts/GTSuper/Text/LightItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Text';
+  font-style: normal;
+  font-weight: 400;
+  src: local('GT Super Text'), url('/assets/fonts/GTSuper/Text/Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Text';
+  font-style: italic;
+  font-weight: 400;
+  src: local('GT Super Text'), url('/assets/fonts/GTSuper/Text/RegularItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Text';
+  font-style: normal;
+  font-weight: 500;
+  src: local('GT Super Text'), url('/assets/fonts/GTSuper/Text/Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Text';
+  font-style: italic;
+  font-weight: 500;
+  src: local('GT Super Text'), url('/assets/fonts/GTSuper/Text/MediumItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Text';
+  font-style: normal;
+  font-weight: 700;
+  src: local('GT Super Text'), url('/assets/fonts/GTSuper/Text/Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Text';
+  font-style: italic;
+  font-weight: 700;
+  src: local('GT Super Text'), url('/assets/fonts/GTSuper/Text/BoldItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Text';
+  font-style: normal;
+  font-weight: 950;
+  src: local('GT Super Text'), url('/assets/fonts/GTSuper/Text/Black.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'GT Super Text';
+  font-style: italic;
+  font-weight: 950;
+  src: local('GT Super Text'), url('/assets/fonts/GTSuper/Text/BlackItalic.woff2') format('woff2');
+}

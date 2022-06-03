@@ -1,0 +1,20 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "extends": [
+    "next",
+    "airbnb-base",
+    "airbnb-typescript",
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "plugins": ["prettier", "@typescript-eslint"],
+  "ignorePatterns": ["next.config.js"],
+  "rules": {
+    "import/extensions": ["warn", "never"],
+    "no-console": ["warn", {"allow": ["warn", "error"]}]
+  }
+}

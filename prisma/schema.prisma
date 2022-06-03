@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URI")
+}
+
+enum UserType {
+  UNREGISTERED
+  REGISTERED
+}
+
+enum UserTier {
+  FREE
+  BASIC
+  PREMIUM
+}
+
+model User {
+  ID String @id @default(auto()) @map("_id") @db.ObjectId
+
+  type UserType @default(UNREGISTERED)
+  tier UserTier @default(FREE)
+
+  IP          String
+  fingerprint String
+  ticket      String @unique
+
+  email    String?
+  password String?
+
+  links Link[]
+
+  @@map("users")
+}
+
+model Link {
+  ID String @id @default(auto()) @map("_id") @db.ObjectId
+
+  createdAt DateTime @default(now())
+  createdBy String   @db.ObjectId
+  creator   User     @relation(fields: [createdBy], references: [ID])
+  expiry    DateTime
+
+  alias       String @unique
+  destination String
+
+  analytics LinkAnalytics[]
+
+  @@map("links")
+}
+
+model LinkAnalytics {
+  ID String @id @default(auto()) @map("_id") @db.ObjectId
+
+  link   Link   @relation(fields: [linkID], references: [ID])
+  linkID String @db.ObjectId
+
+  date DateTime
+
+  data Json
+
+  @@map("analytics")
+}
