@@ -1,20 +1,14 @@
 import 'normalize.css';
 import '../../public/assets/styles/fonts.css';
 
+import {Fragment} from 'react';
 import {NextComponentType, NextPageContext} from 'next';
 import NextApp, {AppContext} from 'next/app';
-import styled, {ThemeProvider} from 'styled-components';
 
 import store from '../store';
 
-import theme, {ThemeProps} from '../static/client/theme';
-
-const PageBackground = styled.div`
-  width: 100vw;
-  height: 100vh;
-
-  background-color: ${({theme: pageTheme}: ThemeProps) => pageTheme.colors.background.primary};
-`;
+import ThemeProvider from '../containers/ThemeProvider';
+import PageWrapper from '../containers/PageWrapper';
 
 class App extends NextApp {
   public static async getInitialProps({Component, ctx}: AppContext) {
@@ -28,11 +22,12 @@ class App extends NextApp {
     };
 
     return (
-      <ThemeProvider theme={theme}>
-        <PageBackground>
+      <Fragment>
+        <ThemeProvider />
+        <PageWrapper>
           <Component {...pageProps} />
-        </PageBackground>
-      </ThemeProvider>
+        </PageWrapper>
+      </Fragment>
     );
   }
 }
