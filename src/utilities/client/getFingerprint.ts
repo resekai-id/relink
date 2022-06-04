@@ -2,7 +2,8 @@ import FingerprintJS from '@fingerprintjs/fingerprintjs';
 
 const getFingerprint = async (): Promise<string | null> => {
   try {
-    const fingerprintJS = await FingerprintJS.load();
+    const fingerprintJS = await FingerprintJS.load({monitoring: false});
+
     const userFingerprint = await fingerprintJS.get();
 
     return userFingerprint.visitorId;
