@@ -6,7 +6,6 @@ declare global {
       [key: string]: string | undefined;
 
       IP_HEADER_NAME?: string;
-      UNREGISTERED_USER_LINK_EXPIRATION_DAYS: string;
 
       HCAPTCHA_SITE_KEY: string;
       HCAPTCHA_SECRET: string;
