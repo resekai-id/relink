@@ -3,14 +3,7 @@ import {FC} from 'react';
 export type DownCaretIconProps = React.SVGAttributes<SVGElement>;
 
 const DownCaretIcon: FC<DownCaretIconProps> = props => (
-  <svg
-    width="9"
-    height="7"
-    viewBox="0 0 9 7"
-    fill="inherit"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+  <svg viewBox="0 0 9 7" fill="inherit" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
