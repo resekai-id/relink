@@ -1,5 +1,5 @@
-import {Action, createAction, PayloadAction} from '@reduxjs/toolkit';
-import {StrictEffect, put, takeEvery, retry, call} from 'redux-saga/effects';
+import {createAction, PayloadAction} from '@reduxjs/toolkit';
+import {StrictEffect, put, takeEvery, call} from 'redux-saga/effects';
 
 import {ShortenLinkPayload} from '../../../schemas/common/shortenLinkPayloadSchema';
 
