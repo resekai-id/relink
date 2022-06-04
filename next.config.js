@@ -2,4 +2,9 @@
 module.exports = {
   reactStrictMode: true,
   styledComponents: true,
+  experimental: {
+    images: {
+      layoutRaw: true,
+    },
+  },
 };

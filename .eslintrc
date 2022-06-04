@@ -14,7 +14,14 @@
   "plugins": ["prettier", "@typescript-eslint"],
   "ignorePatterns": ["next.config.js"],
   "rules": {
-    "import/extensions": ["warn", "never"],
+    "import/extensions": [
+      "warn",
+      {
+        "ts": "never",
+        "tsx": "never",
+        "jpg": "always"
+      }
+    ],
     "no-console": ["warn", {"allow": ["warn", "error"]}]
   }
 }
