@@ -3,11 +3,11 @@ import {Field, Form, Formik} from 'formik';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import objectHash from 'object-hash';
 
-import shortenLinkPayloadSchema from '../schemas/common/shortenLinkPayloadSchema';
+import shortenLinkPayloadSchema from '../../schemas/common/shortenLinkPayloadSchema';
 
-import {useAppDispatch, useAppSelector} from '../store';
-import {shortenLinkAction} from '../store/slices/links/sagas';
-import {LinkStateStatus} from '../store/slices/links/types';
+import {useAppDispatch, useAppSelector} from '../../store';
+import {shortenLinkAction} from '../../store/slices/links/sagas';
+import {LinkStateStatus} from '../../store/slices/links/types';
 
 export interface ShortenFormProps {
   hCaptchaSiteKey: string;

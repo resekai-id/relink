@@ -1,6 +1,6 @@
 import {createGlobalStyle} from 'styled-components';
 
-import theme from '../static/client/theme';
+import theme from '../../static/client/theme';
 
 const ThemeProvider = createGlobalStyle`
   :root {
