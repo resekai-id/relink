@@ -8,6 +8,7 @@ import NextApp, {AppContext} from 'next/app';
 import store from '../store';
 
 import ThemeProvider from '../containers/ThemeProvider';
+import Header from '../containers/Header';
 import PageWrapper from '../containers/PageWrapper';
 
 class App extends NextApp {
@@ -23,8 +24,9 @@ class App extends NextApp {
 
     return (
       <Fragment>
-        <ThemeProvider />
         <PageWrapper>
+          <ThemeProvider />
+          <Header />
           <Component {...pageProps} />
         </PageWrapper>
       </Fragment>

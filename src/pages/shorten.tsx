@@ -8,7 +8,10 @@ export interface ShortenPageProps {
 }
 
 const ShortenPage: NextPage<ShortenPageProps> = ({hCaptchaSiteKey}) => (
-  <Fragment>{/* <ShortenForm hCaptchaSiteKey={hCaptchaSiteKey} /> */}</Fragment>
+  <Fragment>
+    {/* <ShortenForm hCaptchaSiteKey={hCaptchaSiteKey} /> */}
+    <p>Hello World!</p>
+  </Fragment>
 );
 
 export const getStaticProps = () => ({props: {hCaptchaSiteKey: process.env.HCAPTCHA_SITE_KEY}});
