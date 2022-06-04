@@ -35,6 +35,15 @@ const theme = {
       radius: '8px',
     },
   },
+  breakpoints: {
+    smallMobile: '320px',
+    mediumMobile: '375px',
+    largeMobile: '425px',
+    tablet: '768px',
+    laptop: '1024px',
+    largeLaptop: '1440px',
+    desktop: '2560px',
+  },
 } as const;
 
 export default theme;

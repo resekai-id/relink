@@ -24,7 +24,15 @@ const ThemeProvider = createGlobalStyle`
     --border-primary-color: ${theme.borders.primary.color};
     --border-primary-radius: ${theme.borders.primary.radius};
 
-    --border-primary: 1px solid var(--color-border-primary);
+    --border-primary: 1px solid ${theme.borders.primary.color};
+
+    --breakpoint-small-mobile: ${theme.breakpoints.smallMobile};
+    --breakpoint-medium-mobile: ${theme.breakpoints.mediumMobile};
+    --breakpoint-large-mobile: ${theme.breakpoints.largeMobile};
+    --breakpoint-tablet: ${theme.breakpoints.tablet};
+    --breakpoint-laptop: ${theme.breakpoints.laptop};
+    --breakpoint-large-laptop: ${theme.breakpoints.largeLaptop};
+    --breakpoint-desktop: ${theme.breakpoints.desktop};
   }
 `;
 
