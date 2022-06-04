@@ -35,6 +35,6 @@ const theme = {
       radius: '8px',
     },
   },
-};
+} as const;
 
 export default theme;

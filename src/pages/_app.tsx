@@ -9,8 +9,6 @@ import store from '../store';
 
 import theme, {ThemeProps} from '../static/client/theme';
 
-import Header from '../containers/Header';
-
 const PageBackground = styled.div`
   width: 100vw;
   height: 100vh;
@@ -32,7 +30,6 @@ class App extends NextApp {
     return (
       <ThemeProvider theme={theme}>
         <PageBackground>
-          <Header />
           <Component {...pageProps} />
         </PageBackground>
       </ThemeProvider>
