@@ -26,10 +26,10 @@ const theme = {
     secondary:
       '"Fakt Pro", -apple-system, ".SFNSText-Regular", "San Francisco", Roboto, "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif',
   },
-  shadow: {
+  shadows: {
     primary: '0px 0px 8px rgba(0, 0, 0, 0.08)',
   },
-  border: {
+  borders: {
     primary: {
       color: '#D4D7D9',
       radius: '8px',
