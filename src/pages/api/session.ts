@@ -30,12 +30,12 @@ const sessionRequestHandler = async (
   response: NextApiResponse<SessionResponse>
 ) => {
   try {
-    if (!request.query.fingerprint)
+    if (!request.query.seed)
       return response
         .status(400)
         .json({success: false, error: SessionResponseError.MissingFingerprint});
 
-    const clientFingerprint = request.query.fingerprint;
+    const clientFingerprint = request.query.seed;
 
     if (typeof clientFingerprint !== 'string')
       return response
