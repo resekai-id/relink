@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
-import BackgroundImage from './Image';
+import PageBackgroundImage from './Image';
 
-const BackgroundContainer = styled.div`
+const Container = styled.div`
   position: fixed;
   top: 0;
+
+  width: 100vw;
+  height: 100vh;
 
   z-index: -1;
   display: unset;
@@ -12,10 +15,10 @@ const BackgroundContainer = styled.div`
   background-color: var(--color-background-primary);
 `;
 
-const Background = () => (
-  <BackgroundContainer>
-    <BackgroundImage />
-  </BackgroundContainer>
+const PageBackground = () => (
+  <Container>
+    <PageBackgroundImage />
+  </Container>
 );
 
-export default Background;
+export default PageBackground;

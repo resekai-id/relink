@@ -8,6 +8,7 @@ import HeaderLogo from './Logo';
 import HeaderLoginLink from './LoginLink';
 
 const Container = styled.header`
+  z-index: 1;
   box-sizing: border-box;
 
   position: fixed;
@@ -17,11 +18,21 @@ const Container = styled.header`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 24px;
 
-  @media screen and (min-width: ${theme.breakpoints.laptop}) {
-    padding-left: 80px;
-    padding-right: 80px;
+  padding: 1.5em;
+
+  font-size: 1rem;
+
+  max-width: ${theme.breakpoints.desktop};
+
+  @media screen and (min-width: ${theme.breakpoints.largeLaptop}) {
+    padding-left: 3em;
+    padding-right: 3em;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    padding-left: 5em;
+    padding-right: 5em;
   }
 `;
 

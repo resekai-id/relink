@@ -1,9 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import theme from '../../constants/client/theme';
-
-import RelinkLogoIcon from '../../components/RelinkLogoIcon';
+import RelinkLogoIcon from '../../assets/icons/RelinkLogo';
 
 const Icon = styled(RelinkLogoIcon)`
   position: absolute;
@@ -13,35 +11,22 @@ const Icon = styled(RelinkLogoIcon)`
 
   transform: translate(-50%, -50%);
 
-  width: 89px;
+  width: 5.6em;
 
   fill: var(--color-text-primary);
-`;
 
-const Test = styled.a`
-  position: absolute;
-
-  top: 50%;
-  left: 50%;
-
-  transform: translate(-50%, -50%);
-
-  font-family: ${theme.fonts.display};
-  font-style: normal;
-  font-weight: 900;
-  font-size: 28px;
-  line-height: 32px;
-  text-decoration: none;
-  color: #000;
+  transition: fill 0.2s ease-in-out;
 
   :hover {
-    text-decoration: underline;
+    fill: var(--color-text-secondary);
   }
 `;
 
 const HeaderLogo = () => (
   <Link href={'/'} passHref>
-    <Test>relink.</Test>
+    <a>
+      <Icon />
+    </a>
   </Link>
 );
 
