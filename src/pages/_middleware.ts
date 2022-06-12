@@ -42,7 +42,7 @@ export const middleware: NextMiddleware = async request => {
 
     const resolved = (await resolveAPIResponse.json()) as ResolveResponse;
 
-    if (!resolved.success) return NextResponse.redirect(new URL('/', request.url), 302);
+    if (!resolved.success) return NextResponse.redirect(new URL('/404', request.url), 302);
 
     return NextResponse.redirect(resolved.link, 302);
   } catch (error: unknown) {
