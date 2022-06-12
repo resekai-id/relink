@@ -1,8 +1,6 @@
-import {FC} from 'react';
+import {FC, SVGAttributes} from 'react';
 
-export type DownCaretIconProps = React.SVGAttributes<SVGElement>;
-
-const DownCaretIcon: FC<DownCaretIconProps> = props => (
+const DownCaretIcon: FC<SVGAttributes<SVGElement>> = props => (
   <svg viewBox="0 0 9 7" fill="inherit" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path
       fillRule="evenodd"
