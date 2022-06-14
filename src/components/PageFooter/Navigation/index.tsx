@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import theme from '../../../constants/client/theme';
 import {footerPages} from '../../../constants/client/navigation';
 
 const FooterNavigationLink = styled.a`
@@ -16,10 +15,6 @@ const FooterNavigationLink = styled.a`
 
   &:hover {
     color: var(--color-text-primary);
-  }
-
-  @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    font-size: 1em;
   }
 `;
 
@@ -47,6 +42,10 @@ const Container = styled.ul`
 
   margin: 0;
   padding: 0;
+
+  @media screen and (max-width: 20.625em) {
+    display: none;
+  }
 `;
 
 const FooterNavigation = () => (

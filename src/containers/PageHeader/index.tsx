@@ -9,9 +9,10 @@ import HeaderLoginLink from './LoginLink';
 
 const Container = styled.header`
   z-index: 1;
+
   box-sizing: border-box;
 
-  position: fixed;
+  position: sticky;
   width: 100vw;
 
   display: flex;
@@ -24,6 +25,11 @@ const Container = styled.header`
   font-size: 1rem;
 
   max-width: ${theme.breakpoints.desktop};
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
 
   @media screen and (min-width: ${theme.breakpoints.largeLaptop}) {
     padding-left: 3em;

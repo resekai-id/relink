@@ -14,6 +14,8 @@ const FooterIcon = styled(ShortRelinkLogoIcon)`
 const Container = styled.footer`
   user-select: none;
 
+  z-index: 1;
+
   box-sizing: border-box;
 
   width: 100vw;
@@ -29,6 +31,10 @@ const Container = styled.footer`
   border-top: var(--border-primary);
 
   max-width: ${theme.breakpoints.desktop};
+
+  flex: none;
+  order: 2;
+  flex-grow: 0;
 
   @media screen and (min-width: ${theme.breakpoints.largeLaptop}) {
     padding-left: 3em;

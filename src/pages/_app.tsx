@@ -16,10 +16,13 @@ import PageFooter from '../components/PageFooter';
 
 const Container = styled.div`
   display: flex;
-
   flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  align-content: space-between;
+
+  min-height: 100vh;
 `;
 
 class App extends NextApp {
