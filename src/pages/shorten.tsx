@@ -1,13 +1,9 @@
 import {NextPage} from 'next';
-import {Fragment} from 'react';
+
+import LinkList from '../containers/LinkList';
 
 // import ShortenForm from '../containers/ShortenForm';
 
-const ShortenPage: NextPage = () => (
-  <Fragment>
-    {/* <ShortenForm hCaptchaSiteKey={hCaptchaSiteKey} /> */}
-    <p>Hello World!</p>
-  </Fragment>
-);
+const ShortenPage: NextPage = () => <LinkList />;
 
 export default ShortenPage;
