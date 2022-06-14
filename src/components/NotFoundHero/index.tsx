@@ -14,14 +14,8 @@ export type NotFoundHeroProps = {
 const Container = styled.main`
   font-size: 1rem;
 
-  max-width: 100vw;
+  max-width: 100%;
   width: 21.37em;
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-
-  transform: translate(-50%, -50%);
 
   user-select: none;
 

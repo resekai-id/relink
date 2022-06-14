@@ -11,7 +11,7 @@ const Redirect = styled.p`
   font-weight: 400;
 
   margin: 0;
-  margin-top: 1.5em;
+  margin-top: 1em;
 
   line-height: 1.5em;
 
