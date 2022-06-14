@@ -66,8 +66,8 @@ const Container = styled.ul`
     top: 0;
     left: 0;
 
-    padding: 24px;
-    padding-top: 72px;
+    padding: 1.2em;
+    padding-top: 4.5em;
 
     width: 100%;
 
