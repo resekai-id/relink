@@ -39,10 +39,10 @@ model User {
 model Link {
   ID String @id @default(auto()) @map("_id") @db.ObjectId
 
-  createdAt DateTime @default(now())
-  createdBy String   @db.ObjectId
-  creator   User     @relation(fields: [createdBy], references: [ID])
-  expiry    DateTime
+  createdAt DateTime  @default(now())
+  createdBy String    @db.ObjectId
+  creator   User      @relation(fields: [createdBy], references: [ID])
+  expiry    DateTime?
 
   alias       String @unique
   destination String
