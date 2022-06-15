@@ -11,7 +11,7 @@ export type NotFoundHeroProps = {
   subject: NotFoundSubject | Partial<NotFoundSubject>;
 };
 
-const Container = styled.main`
+const Container = styled.div`
   font-size: 1rem;
 
   max-width: 100%;

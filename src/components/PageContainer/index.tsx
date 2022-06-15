@@ -5,7 +5,7 @@ import theme from '../../constants/client/theme';
 
 import PageBackground from './Background';
 
-const Container = styled.div`
+const Container = styled.main`
   z-index: 0;
 
   box-sizing: border-box;

@@ -6,7 +6,7 @@ import notFoundSubjects, {NotFoundSubject} from '../constants/client/404';
 
 import NotFoundHero from '../components/NotFoundHero';
 
-const Container = styled.main`
+const Container = styled.div`
   width: 100%;
   height: 100%;
 
