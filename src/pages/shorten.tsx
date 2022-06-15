@@ -1,9 +1,9 @@
 import {NextPage} from 'next';
 
-import LinkList from '../containers/LinkList';
+import LinkHub from '../containers/LinkHub';
 
 // import ShortenForm from '../containers/ShortenForm';
 
-const ShortenPage: NextPage = () => <LinkList />;
+const ShortenPage: NextPage = () => <LinkHub />;
 
 export default ShortenPage;

@@ -1,5 +1,8 @@
 import styled from 'styled-components';
+
 import LinkListSearch from './Search';
+import LinkListHeader from './Header';
+import LinkList from './List';
 
 const Container = styled.div`
   font-size: 1rem;
@@ -20,10 +23,12 @@ const Container = styled.div`
   border-radius: 0.5em;
 `;
 
-const LinkList = () => (
+const LinkHub = () => (
   <Container>
     <LinkListSearch />
+    <LinkListHeader />
+    <LinkList />
   </Container>
 );
 
-export default LinkList;
+export default LinkHub;

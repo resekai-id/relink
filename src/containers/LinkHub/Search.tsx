@@ -9,16 +9,22 @@ const LinkListSearchInput = styled.input`
   font-style: normal;
   font-weight: 500;
   font-size: 0.875em;
-  line-height: 1em;
+  line-height: 0;
 
   color: var(--color-text-secondary);
 
   outline: none;
   border: none;
+  margin: 0;
+  padding: 0;
 
   flex: none;
   order: 1;
   flex-grow: 1;
+
+  @supports (-webkit-touch-callout: none) {
+    padding-top: 0.25em;
+  }
 
   :placeholder-shown {
     font-weight: 400;
@@ -28,9 +34,9 @@ const LinkListSearchInput = styled.input`
 `;
 
 const LinkListSearchIcon = styled(SearchIcon)`
-  fill: var(--color-text-secondary);
+  color: var(--color-text-secondary);
 
-  width: 1em;
+  width: 0.875em;
   height: auto;
 
   flex: none;
@@ -38,7 +44,7 @@ const LinkListSearchIcon = styled(SearchIcon)`
   flex-grow: 0;
 
   ${LinkListSearchInput}:placeholder-shown + & {
-    fill: var(--color-text-tertiary);
+    color: var(--color-text-tertiary);
   }
 `;
 
@@ -60,6 +66,10 @@ const Container = styled.div`
   padding: 1em;
 
   border-bottom: var(--border-primary);
+
+  flex: none;
+  align-self: stretch;
+  flex-grow: 0;
 `;
 
 const LinkListSearch = () => (
