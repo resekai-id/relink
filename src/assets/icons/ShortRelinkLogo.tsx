@@ -1,12 +1,12 @@
-import {FC, SVGAttributes} from 'react';
+import {FC, memo, SVGAttributes} from 'react';
 
 const ShortRelinkLogoIcon: FC<SVGAttributes<SVGElement>> = props => (
-  <svg viewBox="0 0 28 14" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg viewBox="0 0 28 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path
       d="M10.08.04c-2.064 0-3.624 1.584-3.792 5.904h-.144V.04L.6 1.696v.12c.816.264 1.176.912 1.176 2.208v7.056c0 .984-.504 1.512-1.176 1.8V13h7.392v-.12c-.888-.192-1.656-.624-1.656-1.8V7.912c0-3.096 1.032-3.816 2.568-3.816.744 0 1.104.096 1.416.288h.12V.04h-.36Zm8.815 9.744c-2.136 0-3.575-1.392-3.935-4.104h6.912c0-4.56-2.904-5.64-4.945-5.64-3.263 0-5.64 2.88-5.64 6.912 0 4.2 2.712 6.408 5.472 6.408 1.92 0 4.416-1.104 5.064-4.8l-.192-.048c-.648.912-1.535 1.272-2.736 1.272ZM16.4.832c.96 0 1.463.936 1.463 4.104h-2.976c-.024-.216-.024-.432-.024-.672 0-2.16.553-3.432 1.537-3.432ZM25.67 13.36c1.272 0 2.328-1.056 2.328-2.352a2.346 2.346 0 0 0-2.328-2.328c-1.296 0-2.352 1.056-2.352 2.328a2.356 2.356 0 0 0 2.352 2.352Z"
-      fill="#484A4D"
+      fill="currentColor"
     />
   </svg>
 );
 
-export default ShortRelinkLogoIcon;
+export default memo(ShortRelinkLogoIcon);
