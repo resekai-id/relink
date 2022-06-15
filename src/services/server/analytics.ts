@@ -41,14 +41,6 @@ const handleReferrerAnalyticsData = (
   return updatedReferrerAnalytics;
 };
 
-// TODO.
-const handleCityAnalyticsData = (
-  visitorCity: string,
-  visitorReferrer: string,
-  visitorDeviceType: string,
-  referrerAnalytics: AnalayticsData[string] = {}
-) => {};
-
 const handleAnalyticsData = (
   visitorCountry: string,
   visitorReferrer: string,
