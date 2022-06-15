@@ -8,7 +8,7 @@ const FooterIcon = styled(ShortRelinkLogoIcon)`
   width: 1.8125em;
   height: auto;
 
-  fill: var(--color-text-tertiary);
+  color: var(--color-text-tertiary);
 `;
 
 const Container = styled.footer`
@@ -18,7 +18,7 @@ const Container = styled.footer`
 
   box-sizing: border-box;
 
-  width: 100vw;
+  width: 100%;
 
   display: flex;
   flex-direction: row;

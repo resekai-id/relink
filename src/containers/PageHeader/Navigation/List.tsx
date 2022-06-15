@@ -47,6 +47,28 @@ const PageNavigationListItem = styled.li`
   }
 `;
 
+const navigationActiveStyling = `
+  display: block;
+
+  box-sizing: border-box;
+
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  padding: 1.2em;
+  padding-top: 4.5em;
+
+  width: 100%;
+
+  border-bottom: var(--border-primary);
+  box-shadow: var(--shadow-primary);
+  background-color: var(--color-background-secondary);
+
+  font-size: 0.9em;
+`;
+
 const Container = styled.ul`
   list-style: none;
 
@@ -55,29 +77,7 @@ const Container = styled.ul`
 
   @media screen and (max-width: calc(${theme.breakpoints.laptop} - 1px)) {
     ${({isNavigationActive}: {isNavigationActive: boolean}) =>
-      isNavigationActive
-        ? `
-    display: block;
-
-    box-sizing: border-box;
-
-    z-index: -1;
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    padding: 1.2em;
-    padding-top: 4.5em;
-
-    width: 100%;
-
-    border-bottom: var(--border-primary);
-    box-shadow: var(--shadow-primary);
-    background-color: var(--color-background-secondary);
-
-    font-size: 0.9em;
-    `
-        : 'display: none;'}
+      isNavigationActive ? navigationActiveStyling : 'display: none;'}
   }
 `;
 

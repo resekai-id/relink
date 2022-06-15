@@ -8,11 +8,13 @@ import HamburgerIcon from '../../../assets/icons/Hamburger';
 import PageNavigationList from './List';
 
 const PageNavigationIcon = styled(HamburgerIcon)`
+  cursor: pointer;
+
   display: inline-block;
 
   width: 1.25em;
 
-  fill: var(--color-text-primary);
+  color: var(--color-text-primary);
 
   transition: fill 0.2s ease-in-out;
 
@@ -40,7 +42,7 @@ const PageNavigation = () => {
     <Container>
       <PageNavigationIcon
         onClick={handleNavigationClick}
-        style={{fill: isActive ? 'var(--color-text-secondary)' : 'var(--color-text-primary)'}}
+        style={{color: isActive ? 'var(--color-text-secondary)' : 'var(--color-text-primary)'}}
       />
       <PageNavigationList isNavigationActive={isActive} onNavigate={handleNavigationClick} />
     </Container>

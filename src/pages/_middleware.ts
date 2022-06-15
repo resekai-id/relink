@@ -8,15 +8,13 @@ import aliasSchema from '../schemas/common/aliasSchema';
 export const middleware: NextMiddleware = async request => {
   try {
     // ensure we don't interupt valid [non-shortened link] requests.
-    if (
-      request.method !== 'GET' ||
-      request.page.name !== undefined ||
-      request.nextUrl.pathname.includes('/api/') ||
-      request.nextUrl.pathname.indexOf('/') !== request.nextUrl.pathname.lastIndexOf('/')
-    )
-      return NextResponse.next();
+    if (request.method !== 'GET' || request.page.name !== undefined) return NextResponse.next();
 
-    const alias = request.nextUrl.pathname.split('/')[1];
+    const pathSegments = request.nextUrl.pathname.split('/', 3);
+
+    if (pathSegments.length > 2) return NextResponse.next();
+
+    const alias = pathSegments[1];
 
     // no alias, no redirect.
     if (!alias || !aliasSchema.isValidSync(alias)) return NextResponse.next();
@@ -34,7 +32,6 @@ export const middleware: NextMiddleware = async request => {
         visitor: {
           referrer: request.referrer,
           deviceType: request.ua?.device.type,
-          city: request.geo?.city,
           country: request.geo?.country,
         },
       }),

@@ -10,14 +10,26 @@ const Container = styled.main`
 
   box-sizing: border-box;
 
-  padding: 3em 1.5em;
+  position: relative;
+
+  padding: 6em 1.5em;
+  padding-bottom: 3em;
 
   max-width: min(100%, ${theme.breakpoints.desktop});
+  width: 100%;
+  height: 100%;
 
   flex: none;
   order: 1;
   flex-grow: 1;
-  align-self: stretch;
+  align-self: center;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: space-between;
 
   @media screen and (min-width: ${theme.breakpoints.largeLaptop}) {
     padding-left: 3em;

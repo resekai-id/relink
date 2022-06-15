@@ -3,39 +3,8 @@ import styled from 'styled-components';
 
 import {footerPages} from '../../../constants/client/navigation';
 
-const FooterNavigationLink = styled.a`
-  font-family: var(--font-secondary);
-  font-style: normal;
-  font-weight: 400;
-  font-size: 0.9em;
-
-  color: var(--color-text-secondary);
-
-  text-decoration: none;
-
-  &:hover {
-    color: var(--color-text-primary);
-  }
-`;
-
-const FooterNavigationListItem = styled.li`
-  display: inline-block;
-
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-
-  border-right: var(--border-primary);
-
-  &:first-child {
-    padding-left: 0;
-  }
-
-  &:last-child {
-    padding-right: 0;
-
-    border-right: unset;
-  }
-`;
+import FooterNavigationListItem from './Item';
+import FooterNavigationLink from './Link';
 
 const Container = styled.ul`
   list-style: none;

@@ -13,12 +13,12 @@ const Icon = styled(RelinkLogoIcon)`
 
   width: 5.6em;
 
-  fill: var(--color-text-primary);
+  color: var(--color-text-primary);
 
   transition: fill 0.2s ease-in-out;
 
   :hover {
-    fill: var(--color-text-secondary);
+    color: var(--color-text-secondary);
   }
 `;
 
