@@ -1,5 +1,8 @@
-import type {Link} from '@prisma/client';
 import {Action} from '@reduxjs/toolkit';
+
+import type {ClientLink} from '../../../pages/api/link/shorten';
+
+export type {ClientLink};
 
 export enum LinkStateStatus {
   Pending = 'PENDING',
@@ -9,7 +12,7 @@ export enum LinkStateStatus {
 
 export type LinkState =
   | {status: LinkStateStatus.Pending}
-  | ({status: LinkStateStatus.Ready} & Link)
+  | ({status: LinkStateStatus.Ready} & ClientLink)
   | {status: LinkStateStatus.Fail; error: string};
 
 export type LinksState = {[key: string]: LinkState};
@@ -34,7 +37,7 @@ export type ShortenLinkErrorAction = Action<ShortenLinkActionType.Error> & {
 };
 
 export type ShortenLinkSuccessAction = Action<ShortenLinkActionType.Success> & {
-  payload: {linkStateID: keyof LinksState} & Link;
+  payload: {linkStateID: keyof LinksState} & ClientLink;
 };
 
 export type ShortenLinkAction =

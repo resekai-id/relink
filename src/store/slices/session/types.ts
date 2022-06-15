@@ -1,5 +1,8 @@
 import {Action, PayloadAction} from '@reduxjs/toolkit';
+
 import type {ClientSession} from '../../../pages/api/session';
+
+export type {ClientSession};
 
 export enum SessionStateStatus {
   Idle = 'IDLE',
