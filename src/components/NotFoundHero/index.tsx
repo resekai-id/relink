@@ -14,8 +14,7 @@ export type NotFoundHeroProps = {
 const Container = styled.div`
   font-size: 1rem;
 
-  max-width: 100%;
-  width: 21.37em;
+  width: min(21.37em, 100%);
 
   user-select: none;
 
