@@ -30,12 +30,12 @@ const sessionRequestHandler = async (
   response: NextApiResponse<SessionResponse>
 ) => {
   try {
-    if (!request.query.seed)
+    if (!request.query.fingerprint)
       return response
         .status(400)
         .json({success: false, error: SessionResponseError.MissingFingerprint});
 
-    const clientFingerprint = request.query.seed;
+    const clientFingerprint = request.query.fingerprint;
 
     if (typeof clientFingerprint !== 'string')
       return response
@@ -58,6 +58,7 @@ const sessionRequestHandler = async (
 
         if (dataToUpdate.IP || dataToUpdate.fingerprint) {
           const updatedSessionTicket = createSessionTicket(clientFingerprint, clientIP);
+
           await prisma.user.update({
             where: {ID: requestSession.ID},
             data: {
@@ -66,6 +67,8 @@ const sessionRequestHandler = async (
               ticket: updatedSessionTicket,
             },
           });
+
+          response.setHeader('Set-Cookie', createSessionCookie(updatedSessionTicket));
         }
 
         return response.status(200).json({

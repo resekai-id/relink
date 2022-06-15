@@ -5,7 +5,7 @@ import {SESSION_ENDPOINT} from '../../constants/client/endpoints';
 // eslint-disable-next-line import/prefer-default-export
 export const fetchSession = async (fingerprint: string) => {
   const response = await fetch(
-    `${SESSION_ENDPOINT}?seed=${encodeURIComponent(fingerprint)}`
+    `${SESSION_ENDPOINT}?fingerprint=${encodeURIComponent(fingerprint)}`
   );
 
   const responseBody = (await response.json()) as SessionResponse;
