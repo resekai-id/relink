@@ -1,11 +1,13 @@
 import Link from 'next/link';
 
 import styled from 'styled-components';
-import HeaderLink from './Link';
 
 import theme from '../../constants/client/theme';
+
 import {useAppSelector} from '../../store';
 import {SessionStateStatus} from '../../store/slices/session/types';
+
+import HeaderLink from './Link';
 
 const LoginLink = styled(HeaderLink)`
   z-index: -2;

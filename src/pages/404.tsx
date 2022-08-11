@@ -1,12 +1,12 @@
-import {NextPage} from 'next';
 import {useEffect, useState} from 'react';
+import {NextPage} from 'next';
 import styled from 'styled-components';
 
 import notFoundSubjects, {NotFoundSubject} from '../constants/client/404';
 
 import NotFoundHero from '../components/NotFoundHero';
 
-const Container = styled.div`
+const Container = styled.main`
   width: 100%;
   height: 100%;
 
@@ -14,8 +14,11 @@ const Container = styled.div`
   flex-grow: 1;
 
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
   justify-content: center;
+  align-items: center;
+  align-content: center;
 `;
 
 const NotFoundPage: NextPage = () => {

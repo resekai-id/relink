@@ -1,19 +1,20 @@
 import {FC, Fragment} from 'react';
-import styled from 'styled-components';
 import Link from 'next/link';
+import styled from 'styled-components';
 import Skeleton from 'react-loading-skeleton';
+
+import ThreeText, {ThreeTextType} from '../ThreeText';
 
 import type {NotFoundHeroProps} from '.';
 
-const Redirect = styled.p`
+const RedirectText = styled.p`
+  margin: 0;
+  padding: 0;
+  padding-top: 1em;
+
   font-family: var(--font-primary);
   font-style: normal;
   font-weight: 400;
-
-  margin: 0;
-  margin-top: 1em;
-
-  line-height: 1.5em;
 
   a {
     font-weight: 500;
@@ -29,60 +30,27 @@ const Redirect = styled.p`
   }
 `;
 
-const Punchline = styled.p`
-  margin: 0;
-
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 500;
-  line-height: 1.25em;
-
-  color: var(--color-primary);
-`;
-
-const Body = styled.p`
-  margin-top: 0.125em;
-  margin-bottom: 0.125em;
-
-  font-family: var(--font-primary);
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1.25em;
-
-  color: var(--color-primary);
-`;
-
-const Tagline = styled.p`
-  margin: 0;
-
-  font-family: var(--font-primary);
-  font-style: normal;
-  font-weight: 950;
-  line-height: 1.25em;
-
-  color: var(--color-primary);
-`;
-
 const Container = styled.div`
-  margin-top: 1em;
+  padding-top: 1em;
 `;
 
 const NotFoundText: FC<NotFoundHeroProps> = ({subject}) => (
   <Container>
     {subject.label && subject.video ? (
-      <Fragment>
-        <Tagline>Unlike {subject.label},</Tagline>
-        <Body>you didn’t break the internet.</Body>
-        <Punchline>We just couldn’t find what you were looking for.</Punchline>
-      </Fragment>
+      <ThreeText
+        type={ThreeTextType.Primary}
+        title={`Unlike ${subject.label},`}
+        body={'you didn’t break the internet.'}
+        punchline={'We just couldn’t find what you were looking for.'}
+      />
     ) : (
       <Skeleton count={3} borderRadius={'0.25em'} style={{marginTop: '0.25em'}} />
     )}
-    <Redirect>
+    <RedirectText>
       {' '}
       head back to{' '}
       <Link href="/" passHref>
-        <a>relink.lol</a>
+        <a>{process.env.HOST ?? 'relink.lol'}</a>
       </Link>
       {subject.video && (
         <Fragment>
@@ -94,7 +62,7 @@ const NotFoundText: FC<NotFoundHeroProps> = ({subject}) => (
         </Fragment>
       )}
       .
-    </Redirect>
+    </RedirectText>
   </Container>
 );
 

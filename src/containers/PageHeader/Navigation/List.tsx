@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import {FC} from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 import theme from '../../../constants/client/theme';
 import {headerPages} from '../../../constants/client/navigation';

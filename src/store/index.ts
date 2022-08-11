@@ -7,9 +7,6 @@ import {createWrapper} from 'next-redux-wrapper';
 import sessionSlice from './slices/session';
 import sessionSagasHandler from './slices/session/sagas';
 
-import linksSlice from './slices/links';
-import linksSagasHandler from './slices/links/sagas';
-
 export type Store = ReturnType<typeof createStore>;
 
 export type RootState = ReturnType<Store['getState']>;
@@ -29,19 +26,14 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export function* initializeSaga() {
   yield fork(sessionSagasHandler);
-
-  yield fork(linksSagasHandler);
 }
 
 export const createStore = () => {
   const sagaMiddleware = createSagaMiddleware();
 
   const store = configureStore({
-    reducer: {
-      [sessionSlice.name]: sessionSlice.reducer,
-      [linksSlice.name]: linksSlice.reducer,
-    },
-    middleware: [sagaMiddleware],
+    reducer: {[sessionSlice.name]: sessionSlice.reducer},
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat([sagaMiddleware]),
     devTools: process.env.NODE_ENV !== 'production',
   });
 

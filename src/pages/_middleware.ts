@@ -41,7 +41,7 @@ export const middleware: NextMiddleware = async request => {
 
     if (!resolved.success) return NextResponse.redirect(new URL('/404', request.url), 302);
 
-    return NextResponse.redirect(resolved.link, 302);
+    return NextResponse.redirect(resolved.destination, 302);
   } catch (error: unknown) {
     console.error(error);
 

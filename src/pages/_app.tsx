@@ -3,6 +3,8 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 import '../assets/styles/fonts.css';
 
+import {useState, ComponentProps} from 'react';
+import {QueryClient, QueryClientProvider} from 'react-query';
 import styled from 'styled-components';
 import {NextComponentType, NextPageContext} from 'next';
 import NextApp, {AppContext} from 'next/app';
@@ -24,8 +26,19 @@ const Container = styled.div`
 
   min-height: 100vh;
 `;
-
 class App extends NextApp {
+  state = {
+    queryClient: new QueryClient({
+      defaultOptions: {
+        queries: {
+          retryDelay: attemptCount =>
+            Math.min(2 ** (attemptCount - 1) * 1000, Number.POSITIVE_INFINITY) +
+            Math.random() * 100,
+        },
+      },
+    }),
+  };
+
   public static async getInitialProps({Component, ctx}: AppContext) {
     return {pageProps: Component.getInitialProps ? await Component.getInitialProps(ctx) : {}};
   }
@@ -37,14 +50,16 @@ class App extends NextApp {
     };
 
     return (
-      <Container>
-        <ThemeProvider />
-        <PageHeader />
-        <PageContainer>
-          <Component {...pageProps} />
-        </PageContainer>
-        <PageFooter />
-      </Container>
+      <QueryClientProvider client={this.state.queryClient}>
+        <Container>
+          <ThemeProvider />
+          <PageHeader />
+          <PageContainer>
+            <Component {...pageProps} />
+          </PageContainer>
+          <PageFooter />
+        </Container>
+      </QueryClientProvider>
     );
   }
 }

@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import ShortRelinkLogoIcon from '../../assets/icons/ShortRelinkLogo';
 
 import theme from '../../constants/client/theme';
+
+import ShortRelinkLogoIcon from '../../assets/icons/ShortRelinkLogo';
+
 import FooterNavigation from './Navigation';
 
 const FooterIcon = styled(ShortRelinkLogoIcon)`

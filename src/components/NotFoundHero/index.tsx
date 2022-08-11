@@ -1,8 +1,8 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 
-import {NotFoundSubject} from '../../constants/client/404';
 import theme from '../../constants/client/theme';
+import {NotFoundSubject} from '../../constants/client/404';
 
 import NotFoundImage from './Image';
 import NotFoundText from './Text';
@@ -11,7 +11,7 @@ export type NotFoundHeroProps = {
   subject: NotFoundSubject | Partial<NotFoundSubject>;
 };
 
-const Container = styled.div`
+const Container = styled.section`
   font-size: 1rem;
 
   width: min(21.37em, 100%);

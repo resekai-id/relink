@@ -1,5 +1,5 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import {object, string} from 'yup';
+import {object, string, ValidationError} from 'yup';
 import ShortUniqueID from 'short-unique-id';
 
 import {Link, UserType} from '@prisma/client';
@@ -23,16 +23,12 @@ export const enum ShortenResponseError {
   UnexpectedError = 'UNEXPECTED_ERROR',
 }
 
-export interface ClientLink {
-  ID: string;
-  expiry?: Date;
-  alias: string;
-  destination: string;
-}
+export type ClientLink = Omit<Link, 'createdBy' | 'createdAt'> & {createdAt: string};
 
 export type ShortenResponse =
-  | ({success: true} & ClientLink)
-  | {success: false; error: ShortenResponseError};
+  | {success: true; link: ClientLink}
+  | {success: false; error: ShortenResponseError}
+  | {success: false; error: ShortenResponseError.InvalidRequest; message: string};
 
 export interface ValidatedShortenRequest extends NextApiRequest {
   body: ShortenLinkPayload;
@@ -40,7 +36,7 @@ export interface ValidatedShortenRequest extends NextApiRequest {
 
 export const generateLinkAlias = new ShortUniqueID({length: 7, dictionary: 'alphanum'});
 
-const UNREGISTERED_USER_LINK_EXPIRATION = 7 * 24 * 60 * 60 * 1000;
+const UNREGISTERED_USER_LINK_EXPIRATION = 604800000; // 7 DAYS
 
 export const shortenRequestSchema = object({
   headers: object({'content-type': string().oneOf(['application/json']).required()}),
@@ -52,12 +48,7 @@ const shortenRequestHandler = async (
   response: NextApiResponse<ShortenResponse>
 ) => {
   try {
-    const isRequestValid = shortenRequestSchema.isValidSync(request);
-
-    if (!isRequestValid)
-      return response
-        .status(400)
-        .json({success: false, error: ShortenResponseError.InvalidRequest});
+    await shortenRequestSchema.validate(request, {abortEarly: true});
 
     const sessionToken = request.cookies.session;
 
@@ -66,9 +57,9 @@ const shortenRequestHandler = async (
         .status(401)
         .json({success: false, error: ShortenResponseError.MissingSessionToken});
 
-    const user = verifySessionToken(sessionToken);
+    const sessionUser = verifySessionToken(sessionToken);
 
-    if (!user)
+    if (!sessionUser)
       return response
         .status(400)
         .json({success: false, error: ShortenResponseError.InvalidSessionToken});
@@ -77,7 +68,8 @@ const shortenRequestHandler = async (
 
     const clientIP = getClientIP(request);
 
-    const isValidCaptchaToken = await verifyCaptchaToken(token, clientIP);
+    const isValidCaptchaToken =
+      process.env.NODE_ENV === 'development' ? true : await verifyCaptchaToken(token, clientIP);
 
     if (!isValidCaptchaToken)
       return response
@@ -85,7 +77,7 @@ const shortenRequestHandler = async (
         .json({success: false, error: ShortenResponseError.InvalidCaptchaToken});
 
     const expiry =
-      user.type === UserType.REGISTERED
+      sessionUser.type === UserType.REGISTERED
         ? '' // links created by registered users are never expired.
         : new Date(Date.now() + UNREGISTERED_USER_LINK_EXPIRATION); // links created by unregistered users expire after {{UNREGISTERED_LINK_EXPIRATION_DAYS}}.
 
@@ -96,17 +88,39 @@ const shortenRequestHandler = async (
         destination,
         expiry,
         alias: linkAlias.toLowerCase(),
-        creator: {connect: {ID: user.ID}},
+        creator: {connect: {ID: sessionUser.ID}},
+      },
+      select: {
+        ID: true,
+
+        createdAt: true,
+        expiry: true,
+
+        title: true,
+        alias: true,
+        destination: true,
+
+        clicks: true,
       },
     });
 
     return response.status(200).json({
       success: true,
-      ...link,
-      alias: linkAlias,
+      link: {
+        ...link,
+        createdAt: link.createdAt.toString(),
+        alias: linkAlias,
+      },
     });
   } catch (error: unknown) {
     console.error(error);
+
+    if (error instanceof ValidationError)
+      return response.status(400).json({
+        success: false,
+        error: ShortenResponseError.InvalidRequest,
+        message: error.errors[0] ?? 'Unknown error.',
+      });
 
     if (error instanceof PrismaClientKnownRequestError && error.code === 'P2002')
       return response

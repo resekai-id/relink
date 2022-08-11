@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import {StrictEffect, call, put, takeLatest, fork} from 'redux-saga/effects';
+import {StrictEffect, call, put, takeLatest, fork, retry} from 'redux-saga/effects';
 
 import {fetchSession} from '../../../services/client/session';
 
@@ -20,13 +20,9 @@ export function* initializeSession(): Generator<StrictEffect> {
   try {
     yield initalizeSessionPut({type: InitializeSessionActionType.Pending});
 
-    if (typeof window === 'undefined')
-      return yield initalizeSessionPut({
-        type: InitializeSessionActionType.Error,
-        payload: InitializeSessionActionError.ServerSideEnviroment,
-      });
-
-    const fingerprint = (yield call(getFingerprint)) as Awaited<ReturnType<typeof getFingerprint>>;
+    const fingerprint = (yield retry(3, 1000, getFingerprint)) as Awaited<
+      ReturnType<typeof getFingerprint>
+    >;
 
     if (!fingerprint)
       return yield initalizeSessionPut({
@@ -34,7 +30,7 @@ export function* initializeSession(): Generator<StrictEffect> {
         payload: InitializeSessionActionError.FingerprintFail,
       });
 
-    const session = (yield call(fetchSession, fingerprint)) as Awaited<
+    const session = (yield retry(6, 500, fetchSession, fingerprint)) as Awaited<
       ReturnType<typeof fetchSession>
     >;
 
@@ -62,6 +58,8 @@ export function* initializeSession(): Generator<StrictEffect> {
 }
 
 function* sessionSagasHandler(): Generator<StrictEffect> {
+  if (typeof window === 'undefined') return;
+
   yield fork(initializeSession);
 
   yield takeLatest(initializeSessionAction.type, initializeSession);

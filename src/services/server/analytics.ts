@@ -73,7 +73,7 @@ export const handleAnalytics = async (
 
     const visitorCountry = visitor.country || 'UNKNOWN';
 
-    // ".trim()" to remove whitespace to alllow the "or" statement to work (empty strings are falsy).
+    // ".trim()" to remove whitespace to allow the "or" statement to work (empty strings are falsy).
     const visitorReferrer = new URL(visitor.referrer).hostname.trim() || 'UNKNOWN';
 
     const visitorDeviceType = visitor.deviceType || 'UNKNOWN';

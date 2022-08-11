@@ -6,11 +6,9 @@ import Skeleton from 'react-loading-skeleton';
 import type {NotFoundHeroProps} from '.';
 
 const Container = styled.div`
-  max-width: 100%;
-  width: 21.37em;
+  max-width: min(21.37em, 100%);
+  width: 100%;
   height: 18.75em;
-
-  overflow: hidden;
 
   margin-left: -0.375em;
 `;
@@ -31,14 +29,14 @@ const NotFoundImage: FC<NotFoundHeroProps> = ({subject}) => {
         />
       ) : (
         <Skeleton
-          width={subject.image?.width ? `${subject.image.width}px` : '21.37em'}
+          width={subject.image?.width ? `${subject.image.width}px` : 'min(21.37em, 100%)'}
           height={subject.image?.height ? `${subject.image.height}px` : '18.75em'}
           borderRadius={'0.5em'}
           style={{
-            display: isImageLoaded ? 'none' : 'initial',
-            position: 'absolute',
-            marginLeft: '0.375em',
+            ...(isImageLoaded ? {display: 'none'} : {}),
+
             transition: 'all 0.2s ease-in-out',
+            marginLeft: '0.375em',
           }}
         />
       )}

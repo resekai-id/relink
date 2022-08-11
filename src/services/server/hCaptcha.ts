@@ -1,5 +1,3 @@
-import {HCAPTCHA_VERIFY_ENDPOINT} from '../../constants/server/endpoints';
-
 export interface HCaptchaVerifyResponse {
   success: boolean;
   challenge_ts: string;
@@ -12,9 +10,9 @@ export interface HCaptchaVerifyResponse {
 export const verifyCaptchaToken = async (token: string, clientIP?: string) => {
   try {
     const response = await fetch(
-      `${HCAPTCHA_VERIFY_ENDPOINT}?secret=${
-        process.env.HCAPTCHA_SECRET
-      }&response=${token}&remoteip=${clientIP || ''}`
+      `https://hcaptcha.com/siteverify?secret=${process.env.HCAPTCHA_SECRET}&response=${token}${
+        clientIP ? `&remoteip=${clientIP}` : ''
+      }`
     );
 
     const responseBody = (await response.json()) as HCaptchaVerifyResponse;

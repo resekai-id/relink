@@ -26,7 +26,7 @@ model User {
 
   IP          String
   fingerprint String
-  ticket      String @unique
+  ticket      String
 
   email    String?
   password String?
@@ -44,8 +44,11 @@ model Link {
   creator   User      @relation(fields: [createdBy], references: [ID])
   expiry    DateTime?
 
-  alias       String @unique
+  title       String?
+  alias       String  @unique
   destination String
+
+  clicks Int @default(0)
 
   analytics LinkAnalytics[]
 

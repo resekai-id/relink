@@ -6,7 +6,15 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
 }
 
 const Container = styled.button`
+  ${({disabled}) =>
+    !disabled &&
+    `
   cursor: pointer;
+
+  :hover {
+      box-shadow: var(--shadow-primary);
+    }
+`}
 
   display: flex;
   flex-direction: row;
@@ -19,10 +27,6 @@ const Container = styled.button`
 
   border: none;
   border-radius: 0.25em;
-
-  :hover {
-    box-shadow: var(--shadow-primary);
-  }
 
   svg {
     width: 1em;

@@ -1,4 +1,4 @@
-import type {SessionResponse} from '../../pages/api/session';
+import type {SessionResponse} from '../../pages/api/user/session';
 
 import {SESSION_ENDPOINT} from '../../constants/client/endpoints';
 

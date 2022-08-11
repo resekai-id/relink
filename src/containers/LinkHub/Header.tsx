@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
 
 import PlusIcon from '../../assets/icons/Plus';
@@ -6,8 +6,21 @@ import PlusIcon from '../../assets/icons/Plus';
 import IconButton from '../../components/IconButton';
 import Select from '../../components/Select';
 
+export enum SortOption {
+  DateDecending = 'DATE_DECENDING',
+  DateAscending = 'DATE_ASCENDING',
+  VisitorCountDecending = 'VISITOR_COUNT_DECENDING',
+  VisitorCountAscending = 'VISITOR_COUNT_ASCENDING',
+}
+export interface LinkListHeaderProps {
+  disabled: boolean;
+  onSortUpdate?: (sortOption: SortOption) => void;
+}
+
 const Container = styled.div`
   box-sizing: border-box;
+
+  z-index: 1;
 
   display: flex;
   flex-direction: row;
@@ -19,40 +32,39 @@ const Container = styled.div`
 
   width: 100%;
 
-  background: var(--color-background-tertiary);
+  background-color: var(--color-background-tertiary);
 
   border-bottom: var(--border-primary);
+
+  box-shadow: var(--shadow-primary);
 
   flex: none;
   align-self: stretch;
   flex-grow: 0;
 `;
 
-const options = [
-  {value: 'DATE_DECENDING', label: 'Date (Descending)'},
-  {value: 'DATE_ASCENDING', label: 'Date (Ascending)'},
-  {value: 'VISITOR_COUNT_DECENDING', label: 'Visitor Count (Descending)'},
-  {value: 'VISITOR_COUNT_ASCENDING', label: 'Visitor Count (Ascending)'},
-];
+export const SORT_OPTIONS: Readonly<{value: SortOption; label: string}[]> = [
+  {value: SortOption.DateDecending, label: 'Date (Descending)'},
+  {value: SortOption.DateAscending, label: 'Date (Ascending)'},
+  {value: SortOption.VisitorCountDecending, label: 'Visitor Count (Descending)'},
+  {value: SortOption.VisitorCountAscending, label: 'Visitor Count (Ascending)'},
+] as const;
 
-type OptionType = typeof options[number];
-
-const LinkListHeader = () => {
-  const [currentOption, setCurrentOption] = useState(options[0]);
-
-  return (
-    <Container>
-      <Select
-        id={'headerSelect'}
-        instanceId={'headerSelect'}
-        isSearchable={false}
-        options={options}
-        defaultValue={currentOption}
-        onChange={option => setCurrentOption(option as OptionType)}
-      />
-      <IconButton icon={PlusIcon} />
-    </Container>
-  );
-};
+const LinkListHeader: FC<LinkListHeaderProps> = ({disabled, onSortUpdate}) => (
+  <Container>
+    <Select
+      id={'headerSelect'}
+      instanceId={'linkheaderSelect'}
+      isDisabled={disabled}
+      isSearchable={false}
+      options={SORT_OPTIONS}
+      defaultValue={SORT_OPTIONS[0]}
+      onChange={option => {
+        if (onSortUpdate) onSortUpdate((option as typeof SORT_OPTIONS[number]).value);
+      }}
+    />
+    <IconButton icon={PlusIcon} disabled={disabled} />
+  </Container>
+);
 
 export default LinkListHeader;

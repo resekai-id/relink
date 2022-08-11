@@ -16,5 +16,5 @@ export const shortenLink = async (link: ShortenLinkPayload) => {
 
   if (!responseBody.success) throw new Error(responseBody.error);
 
-  return responseBody;
+  return responseBody.link;
 };

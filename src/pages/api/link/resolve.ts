@@ -1,8 +1,11 @@
+import {UserType} from '@prisma/client';
 import {NextApiRequest, NextApiResponse} from 'next';
-import {object, string} from 'yup';
+import {object, string, ValidationError} from 'yup';
 
 import prisma from '../../../services/server/prisma';
+
 import {handleAnalytics} from '../../../services/server/analytics';
+
 import aliasSchema from '../../../schemas/common/aliasSchema';
 
 export enum ResolveResponseError {
@@ -15,8 +18,9 @@ export enum ResolveResponseError {
 }
 
 export type ResolveResponse =
-  | {success: true; link: string}
-  | {success: false; error: ResolveResponseError};
+  | {success: true; destination: string}
+  | {success: false; error: ResolveResponseError}
+  | {success: false; error: ResolveResponseError.InvalidRequest; message: string};
 
 export interface ResolveRequestHeaders {
   [key: string]: string;
@@ -55,12 +59,7 @@ const resolveRequestHandler = async (
   response: NextApiResponse<ResolveResponse>
 ) => {
   try {
-    const isRequestValid = resolveRequestSchema.isValidSync(request);
-
-    if (!isRequestValid)
-      return response
-        .status(400)
-        .json({success: false, error: ResolveResponseError.InvalidRequest});
+    await resolveRequestSchema.validate(request);
 
     const requestAccessKey = (<ValidatedResolveRequest>request).headers.authorization.split(' ')[1];
 
@@ -77,9 +76,10 @@ const resolveRequestHandler = async (
     if (!aliasSchema.isValidSync(alias))
       return response.status(401).json({success: false, error: ResolveResponseError.InvalidAlias});
 
-    const link = await prisma.link.findFirst({
+    const link = await prisma.link.update({
       where: {alias: alias.toLowerCase()},
-      select: {ID: true, destination: true},
+      select: {ID: true, destination: true, creator: {select: {type: true}}},
+      data: {clicks: {increment: 1}},
     });
 
     if (!link)
@@ -87,12 +87,20 @@ const resolveRequestHandler = async (
         .status(404)
         .json({success: false, error: ResolveResponseError.UnassignedAlias});
 
-    // eslint-disable-next-line no-void
-    void handleAnalytics(link.ID, visitor);
+    if (link.creator.type === UserType.REGISTERED)
+      // eslint-disable-next-line no-void
+      void handleAnalytics(link.ID, visitor);
 
-    return response.status(200).json({success: true, link: link.destination});
+    return response.status(200).json({success: true, destination: link.destination});
   } catch (error: unknown) {
     console.error(error);
+
+    if (error instanceof ValidationError)
+      return response.status(400).json({
+        success: false,
+        error: ResolveResponseError.InvalidRequest,
+        message: error.errors[0] ?? 'Unknown error.',
+      });
 
     return response.status(500).json({success: false, error: ResolveResponseError.UnexpectedError});
   }

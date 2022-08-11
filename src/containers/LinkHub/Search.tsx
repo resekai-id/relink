@@ -1,6 +1,11 @@
+import {FC} from 'react';
 import styled from 'styled-components';
 
 import SearchIcon from '../../assets/icons/Search';
+
+export interface LinkListSearchProps {
+  disabled: boolean;
+}
 
 const LinkListSearchInput = styled.input`
   box-sizing: border-box;
@@ -21,6 +26,8 @@ const LinkListSearchInput = styled.input`
   flex: none;
   order: 1;
   flex-grow: 1;
+
+  background-color: transparent;
 
   @supports (-webkit-touch-callout: none) {
     padding-top: 0.25em;
@@ -51,6 +58,8 @@ const LinkListSearchIcon = styled(SearchIcon)`
 const Container = styled.div`
   box-sizing: border-box;
 
+  z-index: 2;
+
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -67,14 +76,21 @@ const Container = styled.div`
 
   border-bottom: var(--border-primary);
 
+  background-color: ${({disabled}: LinkListSearchProps) =>
+    disabled ? 'var(--color-background-tertiary)' : 'var(--color-background-secondary)'};
+
   flex: none;
   align-self: stretch;
   flex-grow: 0;
 `;
 
-const LinkListSearch = () => (
-  <Container>
-    <LinkListSearchInput type={'text'} placeholder={'Search by name, alias, or tags'} />
+const LinkListSearch: FC<LinkListSearchProps> = ({disabled}) => (
+  <Container disabled={disabled}>
+    <LinkListSearchInput
+      type={'text'}
+      placeholder={'Search by name, alias, or tags'}
+      disabled={disabled}
+    />
     <LinkListSearchIcon />
   </Container>
 );

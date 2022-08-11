@@ -1,16 +1,16 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 
-import {User} from '@prisma/client';
+import {User, UserType} from '@prisma/client';
 
-import prisma from '../../services/server/prisma';
+import prisma from '../../../services/server/prisma';
 import {
   createSessionCookie,
   createSessionTicket,
   createSessionToken,
   verifySessionToken,
-} from '../../services/server/session';
+} from '../../../services/server/session';
 
-import getClientIP from '../../utilities/server/getClientIP';
+import getClientIP from '../../../utilities/server/getClientIP';
 
 export type ClientSession = Pick<User, 'type' | 'tier'>;
 
@@ -24,6 +24,14 @@ export const enum SessionResponseError {
 export type SessionResponse =
   | ({success: true} & ClientSession)
   | {success: false; error: SessionResponseError};
+
+const clientSessionSelect = {
+  ID: true,
+  type: true,
+  tier: true,
+  IP: true,
+  fingerprint: true,
+};
 
 const sessionRequestHandler = async (
   request: NextApiRequest,
@@ -42,13 +50,20 @@ const sessionRequestHandler = async (
         .status(400)
         .json({success: false, error: SessionResponseError.InvalidFingerprint});
 
-    // not using the popular "request-ip" package as it's vulnerable to spoofing.
+    // not using the "request-ip" package as it's vulnerable to spoofing.
     const clientIP = getClientIP(request) || 'UNKNOWN';
 
     if (request.cookies.session) {
-      const requestSession = verifySessionToken(request.cookies.session);
+      let requestSession = verifySessionToken(request.cookies.session);
 
       if (requestSession) {
+        if (requestSession.type === UserType.REGISTERED)
+          return response.json({
+            success: true,
+            type: requestSession.type,
+            tier: requestSession.tier,
+          });
+
         const dataToUpdate: Partial<User> = {};
 
         if (requestSession.IP !== clientIP) dataToUpdate.IP = clientIP;
@@ -59,44 +74,53 @@ const sessionRequestHandler = async (
         if (dataToUpdate.IP || dataToUpdate.fingerprint) {
           const updatedSessionTicket = createSessionTicket(clientFingerprint, clientIP);
 
-          await prisma.user.update({
-            where: {ID: requestSession.ID},
-            data: {
-              IP: clientIP,
-              fingerprint: clientFingerprint,
-              ticket: updatedSessionTicket,
-            },
-          });
+          try {
+            requestSession = await prisma.user.update({
+              where: {ID: requestSession.ID},
+              data: {
+                IP: clientIP,
+                fingerprint: clientFingerprint,
+                ticket: updatedSessionTicket,
+              },
+              select: clientSessionSelect,
+            });
+          } catch {
+            requestSession = null;
+          }
 
-          response.setHeader('Set-Cookie', createSessionCookie(updatedSessionTicket));
+          if (requestSession)
+            response.setHeader('Set-Cookie', createSessionCookie(updatedSessionTicket));
         }
 
-        return response.status(200).json({
-          success: true,
-          type: requestSession.type,
-          tier: requestSession.tier,
-        });
+        if (requestSession)
+          return response.status(200).json({
+            success: true,
+            type: requestSession.type,
+            tier: requestSession.tier,
+          });
       }
     }
 
     const sessionTicket = createSessionTicket(clientFingerprint, clientIP);
 
-    const user = await prisma.user.upsert({
-      where: {ticket: sessionTicket},
-      create: {
-        IP: clientIP,
-        fingerprint: clientFingerprint,
+    let user = await prisma.user.findFirst({
+      where: {
+        type: UserType.UNREGISTERED,
         ticket: sessionTicket,
       },
-      update: {},
-      select: {
-        ID: true,
-        type: true,
-        tier: true,
-        IP: true,
-        fingerprint: true,
-      },
+      select: clientSessionSelect,
     });
+
+    if (!user) {
+      user = await prisma.user.create({
+        data: {
+          IP: clientIP,
+          fingerprint: clientFingerprint,
+          ticket: sessionTicket,
+        },
+        select: clientSessionSelect,
+      });
+    }
 
     const sessionToken = createSessionToken(user);
 

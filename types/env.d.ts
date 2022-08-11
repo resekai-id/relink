@@ -5,6 +5,8 @@ declare global {
     interface ProcessEnv {
       [key: string]: string | undefined;
 
+      HOST?: string;
+
       IP_HEADER_NAME?: string;
 
       HCAPTCHA_SITE_KEY: string;

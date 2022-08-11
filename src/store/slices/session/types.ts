@@ -1,6 +1,10 @@
 import {Action, PayloadAction} from '@reduxjs/toolkit';
 
-import type {ClientSession} from '../../../pages/api/session';
+import {UserType, UserTier} from '@prisma/client';
+
+import type {ClientSession} from '../../../pages/api/user/session';
+
+export {UserType as ClientSessionType, UserTier as ClientSessionTier};
 
 export type {ClientSession};
 

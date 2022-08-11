@@ -5,7 +5,7 @@ import theme from '../../constants/client/theme';
 
 import PageBackground from './Background';
 
-const Container = styled.main`
+const Container = styled.div`
   z-index: 0;
 
   box-sizing: border-box;
@@ -26,10 +26,10 @@ const Container = styled.main`
 
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-  align-content: space-between;
+  align-content: flex-start;
 
   @media screen and (min-width: ${theme.breakpoints.largeLaptop}) {
     padding-left: 3em;
